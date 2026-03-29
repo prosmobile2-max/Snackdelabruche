@@ -110,7 +110,7 @@
       border-radius: 24px; padding: 22px 20px;
       position: relative; overflow: hidden;
     }
-    .hero::after { content:'🔥'; position:absolute; top:16px; right:20px; font-size:48px; opacity:.25; }
+    .hero::after { content:''; position:absolute; top:16px; right:20px; font-size:48px; opacity:.25; }
     .hero-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent-color); text-transform: uppercase; margin-bottom: 6px; }
     .hero-title { font-size: 22px; font-weight: 900; letter-spacing: -.5px; line-height: 1.2; }
     .hero-sub { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
@@ -279,10 +279,10 @@
 <!-- HEADER -->
 <header class="header">
   <div class="header-logo">
-    <div class="logo-icon">🍔</div>
+    <div class="logo-icon">SB</div>
     <div>
       <div class="logo-name">Snack de la Bruche</div>
-      <div class="logo-loc">📍 Molsheim</div>
+      <div class="logo-loc">Molsheim</div>
     </div>
   </div>
   <div class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">Ouvert</span></div>
@@ -290,9 +290,9 @@
 
 <!-- MODE TOGGLE -->
 <div class="mode-bar">
-  <button class="mode-btn active" id="modeAll" onclick="setMode('all')">📋 Tout voir</button>
-  <button class="mode-btn" id="modeSmall" onclick="setMode('small')">😌 Petite faim</button>
-  <button class="mode-btn" id="modeBig" onclick="setMode('big')">🔥 Grosse dalle</button>
+  <button class="mode-btn active" id="modeAll" onclick="setMode('all')">Tout voir</button>
+  <button class="mode-btn" id="modeSmall" onclick="setMode('small')">Petite faim</button>
+  <button class="mode-btn" id="modeBig" onclick="setMode('big')">Grosse dalle</button>
 </div>
 
 <!-- HERO -->
@@ -301,40 +301,40 @@
   <div class="hero-title">Le goût authentique,<br/>la vitesse du futur.</div>
   <div class="hero-sub">Sandwichs · Tacos · Burgers · Assiettes</div>
   <div class="hero-chips">
-    <span class="hero-chip hot">⚡ Service ultra-rapide</span>
-    <span class="hero-chip">⭐ Kofte Bruche maison</span>
-    <span class="hero-chip">🏠 Desserts faits maison</span>
+    <span class="hero-chip hot">Service ultra-rapide</span>
+    <span class="hero-chip">Kofte Bruche maison</span>
+    <span class="hero-chip">Desserts faits maison</span>
   </div>
 </div>
 
 <!-- CATÉGORIES -->
 <div class="cat-wrap">
   <div class="category-bar" id="navCats">
-    <div class="category-item active big-only" data-target="menus">🍱 Menu Sandwich</div>
-    <div class="category-item" data-target="sandwichs">🥙 Sandwichs</div>
-    <div class="category-item big-only" data-target="menus-tacos">🌮 Menu Tacos</div>
-    <div class="category-item" data-target="tacos">🌮 Tacos</div>
-    <div class="category-item" data-target="assiettes">🍽️ Assiettes</div>
-    <div class="category-item" data-target="burgers">🍔 Burgers</div>
-    <div class="category-item big-only" data-target="menus-burgers">🍔 Menu Burgers</div>
-    <div class="category-item" data-target="extras">🍟 Extras</div>
-    <div class="category-item small-only" data-target="desserts">🍮 Desserts</div>
-    <div class="category-item small-only" data-target="boissons">🥤 Boissons</div>
-    <div class="category-item small-only" data-target="bieres">🍺 Bières</div>
+    <div class="category-item active big-only" data-target="menus">Menu Sandwich</div>
+    <div class="category-item" data-target="sandwichs">Sandwichs</div>
+    <div class="category-item big-only" data-target="menus-tacos">Menu Tacos</div>
+    <div class="category-item" data-target="tacos">Tacos</div>
+    <div class="category-item" data-target="assiettes">Assiettes</div>
+    <div class="category-item" data-target="burgers">Burgers</div>
+    <div class="category-item big-only" data-target="menus-burgers">Menu Burgers</div>
+    <div class="category-item" data-target="extras">Extras</div>
+    <div class="category-item small-only" data-target="desserts">Desserts</div>
+    <div class="category-item small-only" data-target="boissons">Boissons</div>
+    <div class="category-item small-only" data-target="bieres">Bières</div>
   </div>
 </div>
 
 <!-- SUPPLEMENTS BAR -->
 <div class="supplements-bar">
-  <span>🍔 Trop faim ? Supplémentaires :</span>
-  <span class="supplement-item">🥩 <strong>Viande +2€</strong></span>
-  <span class="supplement-item">🧀 <strong>Fromage +1€</strong></span>
-  <span class="supplement-item">🍟 <strong>Frites +1€</strong></span>
+  <span>Trop faim ? Supplémentaires :</span>
+  <span class="supplement-item"><strong>Viande +2€</strong></span>
+  <span class="supplement-item"><strong>Fromage +1€</strong></span>
+  <span class="supplement-item"><strong>Frites +1€</strong></span>
 </div>
 
 <!-- ─── MENUS ─── -->
 <section class="section big-only" id="menus">
-  <h2 class="sec-title">🍱 Menu Sandwich</h2>
+  <h2 class="sec-title">Menu Sandwich</h2>
   <div class="sec-sub">Sandwich + Frites + Boisson 33cl</div>
   <div class="product-grid">
     <div class="product-card big-only">
@@ -403,7 +403,7 @@
 
 <!-- ─── SANDWICHS ─── -->
 <section class="section" id="sandwichs">
-  <div class="sec-title">🥙 Sandwichs</div>
+  <div class="sec-title">Sandwichs</div>
   <div class="sec-sub">Pain frais · Garnitures maison · Viandes grillées</div>
   <div class="product-grid">
     <div class="product-card small-only">
@@ -463,7 +463,7 @@
 
 <!-- ─── MENU TACOS ─── -->
 <section class="section big-only" id="menus-tacos">
-  <h2 class="sec-title">🌮 Menu Tacos</h2>
+  <h2 class="sec-title">Menu Tacos</h2>
   <div class="sec-sub">Crudités + cheddar + sauces</div>
   <div class="product-grid">
     <div class="product-card big-only">
@@ -514,9 +514,9 @@
 
 <!-- ─── TACOS ─── -->
 <section class="section" id="tacos">
-  <div class="sec-title">🌮 Tacos</div>
+  <div class="sec-title">Tacos</div>
   <div class="sec-sub">Crudités · Cheddar fondu · Sauce gruyère maison</div>
-  <div class="info-banner">🌮 Seul <strong>8.50€</strong> · Menu frites+boisson <strong>12.5€</strong> · Menu XL <strong>13€</strong></div>
+  <div class="info-banner">Seul <strong>8.50€</strong> · Menu frites+boisson <strong>12.5€</strong> · Menu XL <strong>13€</strong></div>
   <div class="product-grid">
     <div class="product-card small-only">
       <span class="price-tag">8.50€</span>
@@ -566,7 +566,7 @@
 
 <!-- ─── ASSIETTES ─── -->
 <section class="section" id="assiettes">
-  <div class="sec-title">🍽️ Assiettes</div>
+  <div class="sec-title">Assiettes</div>
   <div class="sec-sub">Servi avec frites, riz ou blé au choix</div>
   <div class="product-grid">
     <div class="product-card big-only">
@@ -658,7 +658,7 @@
 
 <!-- ─── BURGERS ─── -->
 <section class="section" id="burgers">
-  <div class="sec-title">🍔 Burgers</div>
+  <div class="sec-title">Burgers</div>
   <div class="sec-sub">Pain artisanal · Menu = +frites +boisson</div>
   <div class="product-grid">
     <div class="product-card big-only">
@@ -708,8 +708,8 @@
 
 <!-- ─── MENU BURGERS ─── -->
 <section class="section big-only" id="menus-burgers">
-  <h2 class="sec-title">🍔 Menu Burgers</h2>
-  <div class="sec-sub">🍟 Frites + Boissons 33cl Cannette</div>
+  <h2 class="sec-title">Menu Burgers</h2>
+  <div class="sec-sub">Frites + Boissons 33cl Cannette</div>
   <div class="product-grid">
     <div class="product-card big-only">
       <span class="price-tag">13€</span>
@@ -759,7 +759,7 @@
 
 <!-- ─── EXTRAS ─── -->
 <section class="section" id="extras">
-  <div class="sec-title">🍟 Extras & Bowl</div>
+  <div class="sec-title">Extras & Bowl</div>
   <div class="sec-sub">Boxes, frites, bowl</div>
   <div class="product-grid">
     <div class="product-card small-only">
@@ -811,7 +811,7 @@
     <div class="product-card big-only" style="border-color:rgba(255,92,0,.3);background:rgba(255,92,0,.06)">
       <span class="price-tag">20€</span>
       <img class="product-image" src="images/extra-box-nuggets.png" alt="Maxi Box" loading="lazy"/>
-      <h3 class="product-name">🔥 Maxi Box</h3>
+      <h3 class="product-name">Maxi Box</h3>
       <p class="product-desc">4 nuggets · 4 tenders · 4 wings · 2 frites · 1 bouteille 1.5L</p>
     </div>
   </div>
@@ -820,8 +820,8 @@
 
 <!-- ─── DESSERTS ─── -->
 <section class="section small-only" id="desserts">
-  <div class="sec-title">🍮 Desserts</div>
-  <div class="sec-sub">Faits maison avec amour ❤️</div>
+  <div class="sec-title">Desserts</div>
+  <div class="sec-sub">Faits maison avec amour</div>
   <div class="product-grid">
     <div class="product-card small-only">
       <span class="price-tag">4€</span>
@@ -864,7 +864,7 @@
 
 <!-- ─── BOISSONS ─── -->
 <section class="section small-only" id="boissons">
-  <div class="sec-title">🥤 Boissons</div>
+  <div class="sec-title">Boissons</div>
   <div class="sec-sub">Fraîches · Formats variés</div>
   <div class="bois-grid">
     <div class="bois-card"><div class="bois-name">Ayran</div><div class="bois-sub">33cl</div><div class="bois-price">2€</div></div>
@@ -896,7 +896,7 @@
 
 <!-- ─── BIÈRES ─── -->
 <section class="section small-only" id="bieres">
-  <div class="sec-title">🍺 Bières & Pression</div>
+  <div class="sec-title">Bières & Pression</div>
   <div class="sec-sub">En bouteille, cannette ou au fût</div>
   <div class="bois-grid">
     <div class="bois-card"><div class="bois-name">Bière Efes</div><div class="bois-sub">50cl bouteille</div><div class="bois-price">4€</div></div>
