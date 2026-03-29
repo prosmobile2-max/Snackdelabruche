@@ -57,6 +57,22 @@
     .dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
 
+    /* ─── SUPPLEMENTS BAR ─── */
+    .supplements-bar {
+      position: sticky; top: 69px; z-index: 95;
+      background: linear-gradient(135deg, rgba(255,92,0,0.12), rgba(255,92,0,0.06));
+      border-bottom: 1px solid rgba(255,92,0,0.25);
+      padding: 10px 20px;
+      text-align: center;
+      font-size: 12px; font-weight: 600;
+      color: rgba(255,163,120,1);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      line-height: 1.5;
+    }
+    .supplements-bar strong { color: var(--accent-color); font-weight: 800; }
+    @media (max-width: 380px) {
+      .supplements-bar { font-size: 10px; padding: 8px 12px; }
+    }
 
     /* ─── MODE TOGGLE ─── */
     .mode-bar { display: flex; gap: 10px; padding: 16px 20px 8px; }
@@ -100,7 +116,7 @@
 
     /* ─── CATÉGORIES ─── */
     .cat-wrap {
-      position: sticky; top: 69px; z-index: 90;
+      position: sticky; top: 110px; z-index: 90;
       background: rgba(15,15,15,0.95);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
@@ -263,6 +279,11 @@
   </div>
   <div class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">Ouvert</span></div>
 </header>
+
+<!-- SUPPLEMENTS BAR -->
+<div class="supplements-bar">
+  🍔 Trop faim ? <strong>Supplément viande +2€</strong> · <strong>Fromage +1€</strong> · <strong>Frites +1€</strong>
+</div>
 
 <!-- MODE TOGGLE -->
 <div class="mode-bar">
@@ -961,7 +982,7 @@
           if(a){ a.classList.add('active'); a.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'}); }
         }
       });
-    }, {rootMargin:'-140px 0px -60% 0px'});
+    }, {rootMargin:'-180px 0px -60% 0px'});
     secs.forEach(function(s){ obs.observe(s); });
   } catch(e) { console.error('nav error:', e); }
 
