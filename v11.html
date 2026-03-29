@@ -157,7 +157,7 @@
       width: 100%; height: 180px;
       object-fit: cover; border-radius: 18px;
       margin-bottom: 12px; display: block;
-      background: rgba(255,255,255,0.04); clear: both;
+      background: transparent; clear: both;
     }
     .product-name { font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -.3px; margin: 10px 0 5px; }
     .product-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; margin-bottom: 14px; }
@@ -293,6 +293,7 @@
     <div class="category-item" data-target="tacos">🌮 Tacos</div>
     <div class="category-item" data-target="assiettes">🍽️ Assiettes</div>
     <div class="category-item" data-target="burgers">🍔 Burgers</div>
+    <div class="category-item big-only" data-target="menus-burgers">🍔 Menu Burgers</div>
     <div class="category-item" data-target="extras">🍟 Extras</div>
     <div class="category-item small-only" data-target="desserts">🍮 Desserts</div>
     <div class="category-item small-only" data-target="boissons">🥤 Boissons</div>
@@ -522,7 +523,7 @@
 <section class="section" id="tacos">
   <div class="sec-title">🌮 Tacos</div>
   <div class="sec-sub">Crudités · Cheddar fondu · Sauce gruyère maison</div>
-  <div class="info-banner">🌮 Seul <strong>8.50€</strong> · Menu frites+boisson <strong>12€</strong> · Menu XL <strong>13€</strong></div>
+  <div class="info-banner">🌮 Seul <strong>8.50€</strong> · Menu frites+boisson <strong>12.5€</strong> · Menu XL <strong>13€</strong></div>
   <div class="product-grid">
     <div class="product-card small-only">
       <span class="price-tag">8.50€</span>
@@ -647,6 +648,12 @@
       <h3 class="product-name">Nuggets</h3>
       <p class="product-desc">Frites, riz ou blé</p>
     </div>
+    <div class="product-card big-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/assiette-lahmacun.png" alt="Lahmacun" loading="lazy"/>
+      <h3 class="product-name">Lahmacun</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
     <div class="product-card small-only">
       <span class="price-tag">6.50€</span>
       <img class="product-image" src="images/assiette-salade.png" alt="Salade" loading="lazy"/>
@@ -701,6 +708,57 @@
       <span class="price-tag">4€</span>
       <img class="product-image" src="images/burger-mini-cheese.png" alt="Mini Cheese" loading="lazy"/>
       <h3 class="product-name">Mini Cheese</h3>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── MENU BURGERS ─── -->
+<section class="section big-only" id="menus-burgers">
+  <h2 class="sec-title">🍔 Menu Burgers</h2>
+  <div class="sec-sub">🍟 Frites + Boissons 33cl Cannette</div>
+  <div class="product-grid">
+    <div class="product-card big-only">
+      <span class="price-tag">13€</span>
+      <img class="product-image" src="images/menu-big-burger.png" alt="Menu Big Burger" loading="lazy"/>
+      <h3 class="product-name">Menu Big Burger</h3>
+      <p class="product-desc">Frites + Boissons 33cl</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">9€</span>
+      <img class="product-image" src="images/menu-cheeseburger.png" alt="Menu Cheeseburger" loading="lazy"/>
+      <h3 class="product-name">Menu Cheeseburger</h3>
+      <p class="product-desc">Frites + Boissons 33cl</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">9€</span>
+      <img class="product-image" src="images/menu-chicken-burger.png" alt="Menu Chicken Burger" loading="lazy"/>
+      <h3 class="product-name">Menu Chicken Burger</h3>
+      <p class="product-desc">Frites + Boissons 33cl</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">9€</span>
+      <img class="product-image" src="images/menu-doublecheese.png" alt="Menu Doublecheese" loading="lazy"/>
+      <h3 class="product-name">Menu Doublecheese</h3>
+      <p class="product-desc">Frites + Boissons 33cl</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">9€</span>
+      <img class="product-image" src="images/menu-fish-burger.png" alt="Menu Fish Burger" loading="lazy"/>
+      <h3 class="product-name">Menu Fish Burger</h3>
+      <p class="product-desc">Frites + Boissons 33cl</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">9€</span>
+      <img class="product-image" src="images/menu-kebab-burger.png" alt="Menu Kebab Burger" loading="lazy"/>
+      <h3 class="product-name">Menu Kebab Burger</h3>
+      <p class="product-desc">Frites + Boissons 33cl</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">6.5€</span>
+      <img class="product-image" src="images/menu-mini-cheese.png" alt="Menu Mini Cheese" loading="lazy"/>
+      <h3 class="product-name">Menu Mini Cheese</h3>
+      <p class="product-desc">Frites + Boissons 33cl</p>
     </div>
   </div>
 </section>
