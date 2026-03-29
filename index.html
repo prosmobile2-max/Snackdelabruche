@@ -59,19 +59,26 @@
 
     /* ─── SUPPLEMENTS BAR ─── */
     .supplements-bar {
-      position: sticky; top: 69px; z-index: 95;
-      background: linear-gradient(135deg, rgba(255,92,0,0.12), rgba(255,92,0,0.06));
-      border-bottom: 1px solid rgba(255,92,0,0.25);
-      padding: 10px 20px;
+      position: sticky; top: 123px; z-index: 89;
+      background: rgba(0,0,0,0.85);
+      border-bottom: 1px solid rgba(255,92,0,0.3);
+      padding: 12px 20px;
       text-align: center;
-      font-size: 12px; font-weight: 600;
-      color: rgba(255,163,120,1);
-      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-      line-height: 1.5;
+      font-size: 13px; font-weight: 600;
+      color: #fff;
+      backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+      line-height: 1.6;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
     .supplements-bar strong { color: var(--accent-color); font-weight: 800; }
+    .supplement-item { display: inline-flex; align-items: center; gap: 6px; white-space: nowrap; }
     @media (max-width: 380px) {
-      .supplements-bar { font-size: 10px; padding: 8px 12px; }
+      .supplements-bar { font-size: 11px; padding: 10px 12px; gap: 10px; }
     }
 
     /* ─── MODE TOGGLE ─── */
@@ -116,11 +123,12 @@
 
     /* ─── CATÉGORIES ─── */
     .cat-wrap {
-      position: sticky; top: 110px; z-index: 90;
+      position: sticky; top: 69px; z-index: 90;
       background: rgba(15,15,15,0.95);
       backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--glass-border);
       padding: 12px 20px;
+      margin: 0;
     }
     .category-bar {
       display: flex; overflow-x: auto;
@@ -280,11 +288,6 @@
   <div class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">Ouvert</span></div>
 </header>
 
-<!-- SUPPLEMENTS BAR -->
-<div class="supplements-bar">
-  🍔 Trop faim ? <strong>Supplément viande +2€</strong> · <strong>Fromage +1€</strong> · <strong>Frites +1€</strong>
-</div>
-
 <!-- MODE TOGGLE -->
 <div class="mode-bar">
   <button class="mode-btn active" id="modeAll" onclick="setMode('all')">📋 Tout voir</button>
@@ -320,6 +323,14 @@
     <div class="category-item small-only" data-target="boissons">🥤 Boissons</div>
     <div class="category-item small-only" data-target="bieres">🍺 Bières</div>
   </div>
+</div>
+
+<!-- SUPPLEMENTS BAR -->
+<div class="supplements-bar">
+  <span>🍔 Trop faim ?</span>
+  <span class="supplement-item">🥩 <strong>Viande +2€</strong></span>
+  <span class="supplement-item">🧀 <strong>Fromage +1€</strong></span>
+  <span class="supplement-item">🍟 <strong>Frites +1€</strong></span>
 </div>
 
 <!-- ─── BEST-SELLERS ─── -->
@@ -971,7 +982,7 @@
     cats.forEach(function(c) {
       c.addEventListener('click', function() {
         var t = document.getElementById(c.dataset.target);
-        if(t) window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 140, behavior:'smooth'});
+        if(t) window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 170, behavior:'smooth'});
       });
     });
     var obs = new IntersectionObserver(function(entries) {
@@ -982,7 +993,7 @@
           if(a){ a.classList.add('active'); a.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'}); }
         }
       });
-    }, {rootMargin:'-180px 0px -60% 0px'});
+    }, {rootMargin:'-170px 0px -60% 0px'});
     secs.forEach(function(s){ obs.observe(s); });
   } catch(e) { console.error('nav error:', e); }
 
