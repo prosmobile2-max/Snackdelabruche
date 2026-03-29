@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0"/>
+  <title>Snack de la Bruche | Menu</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-color: #0f0f0f;
+      --card-bg: #1a1a1a;
+      --accent-color: #ff5c00;
+      --text-main: #ffffff;
+      --text-dim: #a0a0a0;
+      --glass-border: rgba(255,255,255,0.1);
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      padding: 0 0 40px;
+    }
+
+    /* ─── HEADER ─── */
+    .header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,15,15,0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 14px 20px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .header-logo { display: flex; align-items: center; gap: 11px; }
+    .logo-icon {
+      width: 40px; height: 40px; background: var(--accent-color);
+      border-radius: 12px; display: flex; align-items: center;
+      justify-content: center; font-size: 20px;
+      box-shadow: 0 0 18px rgba(255,92,0,0.4);
+    }
+    .logo-name { font-size: 15px; font-weight: 800; letter-spacing: -.3px; }
+    .logo-loc { font-size: 11px; color: var(--text-dim); margin-top: 1px; }
+    .status-pill.closed { background: rgba(255,60,60,0.1); border-color: rgba(255,60,60,0.25); color: #f87171; }
+    .status-pill.closed .dot { background: #f87171; }
+    .status-pill {
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(74,222,128,0.1);
+      border: 1px solid rgba(74,222,128,0.25);
+      border-radius: 50px; padding: 6px 12px;
+      font-size: 11px; font-weight: 700; color: #4ade80;
+    }
+    .dot { width: 7px; height: 7px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+
+
+    /* ─── MODE TOGGLE ─── */
+    .mode-bar { display: flex; gap: 10px; padding: 16px 20px 8px; }
+    .mode-btn {
+      flex: 1; background: var(--card-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px; padding: 11px 8px;
+      font-size: 13px; font-weight: 700;
+      color: var(--text-dim); cursor: pointer;
+      font-family: 'Inter', sans-serif; text-align: center;
+      transition: all .2s;
+    }
+    .mode-btn.active {
+      background: var(--accent-color); border-color: var(--accent-color);
+      color: #000; box-shadow: 0 0 20px rgba(255,92,0,0.35);
+    }
+
+    /* ─── MODE FILTER ─── */
+    body.mode-small .big-only { display: none !important; }
+    body.mode-big .small-only { display: none !important; }
+    body.mode-all .small-only, body.mode-all .big-only { display: block !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      margin: 12px 20px 0;
+      background: linear-gradient(135deg, rgba(255,92,0,0.15), rgba(255,92,0,0.04));
+      border: 1px solid rgba(255,92,0,0.2);
+      border-radius: 24px; padding: 22px 20px;
+      position: relative; overflow: hidden;
+    }
+    .hero::after { content:'🔥'; position:absolute; top:16px; right:20px; font-size:48px; opacity:.25; }
+    .hero-tag { font-size: 10px; font-weight: 700; letter-spacing: 2px; color: var(--accent-color); text-transform: uppercase; margin-bottom: 6px; }
+    .hero-title { font-size: 22px; font-weight: 900; letter-spacing: -.5px; line-height: 1.2; }
+    .hero-sub { font-size: 12px; color: var(--text-dim); margin-top: 6px; }
+    .hero-chips { display: flex; gap: 8px; margin-top: 14px; flex-wrap: wrap; }
+    .hero-chip {
+      background: rgba(255,255,255,0.08); border: 1px solid var(--glass-border);
+      border-radius: 50px; padding: 5px 12px; font-size: 11px; font-weight: 600;
+    }
+    .hero-chip.hot { background: rgba(255,92,0,.2); border-color: rgba(255,92,0,.3); color: #ff8a50; }
+
+    /* ─── CATÉGORIES ─── */
+    .cat-wrap {
+      position: sticky; top: 69px; z-index: 90;
+      background: rgba(15,15,15,0.95);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--glass-border);
+      padding: 12px 20px;
+    }
+    .category-bar {
+      display: flex; overflow-x: auto;
+      gap: 8px; padding-bottom: 0;
+      scrollbar-width: none; -ms-overflow-style: none;
+    }
+    .category-bar::-webkit-scrollbar { display: none; }
+    .category-item {
+      background: var(--card-bg);
+      padding: 8px 16px;
+      border-radius: 50px;
+      white-space: nowrap;
+      border: 1px solid var(--glass-border);
+      font-size: 13px; font-weight: 600;
+      color: var(--text-dim); cursor: pointer;
+      transition: all .2s; user-select: none; flex-shrink: 0;
+    }
+    .category-item.active {
+      background: var(--accent-color);
+      border-color: var(--accent-color);
+      color: #000; font-weight: 700;
+    }
+
+    /* ─── SECTIONS ─── */
+    .section { padding: 24px 16px 8px; }
+    .sec-title { font-size: 22px; font-weight: 900; letter-spacing: -.5px; margin-bottom: 4px; }
+    .sec-sub { font-size: 12px; color: var(--text-dim); margin-bottom: 18px; }
+    .divider { height: 1px; background: var(--glass-border); margin: 10px 20px; }
+
+    /* ─── PRODUCT CARD (grande, image 180px) ─── */
+    .product-grid { display: flex; flex-direction: column; gap: 0; }
+    .product-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 24px; padding: 16px;
+      margin-bottom: 14px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.04), 0 4px 20px rgba(0,0,0,0.45);
+      transition: transform .3s ease, border-color .2s, box-shadow .2s;
+    }
+    .product-card:active { transform: scale(0.98); }
+    .product-card:hover { border-color: rgba(255,92,0,.4); box-shadow: 0 0 0 1px rgba(255,92,0,.08), 0 4px 24px rgba(255,92,0,.15); }
+    .product-image { will-change: auto; }
+    .price-tag {
+      background: var(--accent-color); color: #000;
+      font-weight: 800; font-size: 14px;
+      padding: 6px 14px; border-radius: 50px;
+      float: right; margin-bottom: 8px;
+    }
+    .product-image {
+      width: 100%; height: 180px;
+      object-fit: cover; border-radius: 18px;
+      margin-bottom: 12px; display: block;
+      background: rgba(255,255,255,0.04); clear: both;
+    }
+    .product-name { font-size: 16px; font-weight: 800; line-height: 1.2; letter-spacing: -.3px; margin: 10px 0 5px; }
+    .product-desc { font-size: 13px; color: var(--text-dim); line-height: 1.5; margin-bottom: 14px; }
+    .product-button {
+      width: 100%; background: #fff; color: #000;
+      border: none; padding: 13px; border-radius: 12px;
+      font-size: 14px; font-weight: 800; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all .2s; letter-spacing: -.2px;
+    }
+    .badge {
+      font-size: 10px; font-weight: 800; padding: 4px 9px;
+      border-radius: 50px; letter-spacing: .5px; text-transform: uppercase;
+      background: rgba(255,92,0,.9); color: #000; white-space: nowrap;
+      float: left; margin-bottom: 4px;
+    }
+    .badge.new { background: rgba(74,222,128,.85); }
+
+    /* ─── LISTE compacte (sans photo) ─── */
+    .list-simple { display: flex; flex-direction: column; gap: 10px; }
+    .row {
+      background: var(--card-bg);
+      
+      border: 1px solid var(--glass-border);
+      border-radius: 18px; padding: 14px 16px;
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      transition: border-color .2s;
+    }
+    .row:hover { border-color: rgba(255,92,0,.2); }
+    .row-left { flex: 1; min-width: 0; }
+    .row-name { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .row-desc { font-size: 11px; color: var(--text-dim); line-height: 1.4; }
+    .row-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .row-price {
+      background: var(--accent-color); color: #000;
+      font-weight: 800; font-size: 13px;
+      padding: 5px 12px; border-radius: 50px;
+    }
+    .row-add {
+      width: 30px; height: 30px; background: rgba(255,255,255,0.07);
+      border: 1px solid var(--glass-border); border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; font-weight: 300; cursor: pointer;
+      transition: all .15s; color: var(--text-main); line-height: 1;
+    }
+    .row-add:hover { background: var(--accent-color); border-color: var(--accent-color); color: #000; }
+
+    /* ─── INFO BANNER ─── */
+    .info-banner {
+      background: rgba(255,92,0,.08); border: 1px solid rgba(255,92,0,.18);
+      border-radius: 16px; padding: 12px 16px; font-size: 12px;
+      color: rgba(255,163,120,.9); margin-bottom: 14px; line-height: 1.6;
+    }
+
+    /* ─── BOISSONS GRID ─── */
+    .bois-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .bois-card {
+      background: var(--card-bg); border: 1px solid var(--glass-border);
+      border-radius: 18px; padding: 13px 14px;
+    }
+    .bois-name { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
+    .bois-sub { font-size: 11px; color: var(--text-dim); }
+    .bois-price {
+      display: inline-block; background: var(--accent-color); color: #000;
+      font-size: 12px; font-weight: 800; padding: 3px 10px;
+      border-radius: 50px; margin-top: 7px;
+    }
+
+    /* ─── FAB ─── */
+    .fab {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+      padding: 10px 20px 30px;
+      background: linear-gradient(to top, var(--bg-color) 55%, transparent);
+      display: flex; gap: 10px; align-items: center;
+    }
+    .fab-wa {
+      width: 52px; height: 52px; background: #25D366; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 24px; flex-shrink: 0;
+      transition: transform .15s; box-shadow: 0 4px 16px rgba(37,211,102,.3);
+    }
+    .fab-wa:active { transform: scale(.92); }
+    .fab-main {
+      flex: 1; background: var(--accent-color); color: #000;
+      border: none; border-radius: 16px; height: 52px;
+      font-size: 15px; font-weight: 800; font-family: 'Inter', sans-serif;
+      cursor: pointer; transition: all .2s; letter-spacing: -.2px;
+      box-shadow: 0 4px 20px rgba(255,92,0,.4);
+    }
+    .fab-main:active { transform: scale(.97); }
+
+  </style>
+</head>
+<body id="body">
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-logo">
+    <div class="logo-icon">🍔</div>
+    <div>
+      <div class="logo-name">Snack de la Bruche</div>
+      <div class="logo-loc">📍 Molsheim</div>
+    </div>
+  </div>
+  <div class="status-pill" id="statusPill"><span class="dot"></span><span id="statusText">Ouvert</span></div>
+</header>
+
+<!-- MODE TOGGLE -->
+<div class="mode-bar">
+  <button class="mode-btn active" id="modeAll" onclick="setMode('all')">📋 Tout voir</button>
+  <button class="mode-btn" id="modeSmall" onclick="setMode('small')">😌 Petite faim</button>
+  <button class="mode-btn" id="modeBig" onclick="setMode('big')">🔥 Grosse dalle</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Snack de la Bruche — Molsheim</div>
+  <div class="hero-title">Le goût authentique,<br/>la vitesse du futur.</div>
+  <div class="hero-sub">Sandwichs · Tacos · Burgers · Assiettes</div>
+  <div class="hero-chips">
+    <span class="hero-chip hot">🎉 -10% promo midi</span>
+    <span class="hero-chip">⭐ Kofte Bruche maison</span>
+    <span class="hero-chip">🏠 Desserts faits maison</span>
+  </div>
+</div>
+
+<!-- CATÉGORIES -->
+<div class="cat-wrap">
+  <div class="category-bar" id="navCats">
+    <div class="category-item active small-only" data-target="best">🔥 Best-Sellers</div>
+    <div class="category-item big-only" data-target="menus">🍱 Menu Sandwich</div>
+    <div class="category-item" data-target="sandwichs">🥙 Sandwichs</div>
+    <div class="category-item big-only" data-target="menus-tacos">🌮 Menu Tacos</div>
+    <div class="category-item" data-target="tacos">🌮 Tacos</div>
+    <div class="category-item" data-target="assiettes">🍽️ Assiettes</div>
+    <div class="category-item" data-target="burgers">🍔 Burgers</div>
+    <div class="category-item" data-target="extras">🍟 Extras</div>
+    <div class="category-item small-only" data-target="desserts">🍮 Desserts</div>
+    <div class="category-item small-only" data-target="boissons">🥤 Boissons</div>
+    <div class="category-item small-only" data-target="bieres">🍺 Bières</div>
+  </div>
+</div>
+
+<!-- ─── BEST-SELLERS ─── -->
+<section class="section small-only" id="best">
+  <div class="sec-title">🔥 Best-Sellers</div>
+  <div class="sec-sub">Les incontournables validés par nos clients</div>
+  <div class="product-grid">
+
+    <div class="product-card">
+      <span class="badge">⭐ Top</span>
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/kofte-bruche-maison.png" alt="Kofte Bruche Maison" loading="eager"/>
+      <h3 class="product-name">Kofte Bruche Maison</h3>
+      <p class="product-desc">Recette signature de la maison, viande grillée façon bruche.</p>
+    </div>
+
+    <div class="product-card">
+      <span class="badge">🔥 #1</span>
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/kebab.png" alt="Kebab Menu" loading="eager"/>
+      <h3 class="product-name">Kebab Menu</h3>
+      <p class="product-desc">Avec frites croustillantes + boisson 33cl.</p>
+    </div>
+
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/american.png" alt="American" loading="lazy"/>
+      <h3 class="product-name">American</h3>
+    </div>
+
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/lahmacun-maison.png" alt="Lahmacun Maison" loading="lazy"/>
+      <h3 class="product-name">Lahmacun Maison</h3>
+    </div>
+
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── MENUS ─── -->
+<section class="section big-only" id="menus">
+  <h2 class="sec-title">🍱 Menu Sandwich</h2>
+  <div class="sec-sub">Sandwich + Frites + Boisson 33cl</div>
+  <div class="product-grid">
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-american.jpg" alt="Menu American" loading="lazy"/>
+      <h3 class="product-name">Menu American</h3>
+      <p class="product-desc">Sandwich + frites + boisson · XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-escalop-poulet.jpg" alt="Menu Escalope de Poulet" loading="lazy"/>
+      <h3 class="product-name">Menu Escalope de Poulet</h3>
+      <p class="product-desc">Sandwich + frites + boisson · XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-kebab.jpg" alt="Menu Kebab" loading="lazy"/>
+      <h3 class="product-name">Menu Kebab</h3>
+      <p class="product-desc">Veau, Poulet ou Mixte · XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">17€</span>
+      <img class="product-image" src="images/menu-kebab-entier.jpg" alt="Menu Kebab Entier" loading="lazy"/>
+      <h3 class="product-name">Menu Kebab Entier</h3>
+      <p class="product-desc">Veau, Poulet ou Mixte · XL 18€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-kofte-bruche.jpg" alt="Menu Kofte Bruche Maison" loading="lazy"/>
+      <h3 class="product-name">Menu Kofte Bruche Maison</h3>
+      <p class="product-desc">Recette maison · XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-kofte-maison.jpg" alt="Menu Kofte Maison" loading="lazy"/>
+      <h3 class="product-name">Menu Kofte Maison</h3>
+      <p class="product-desc">Sandwich + frites + boisson · XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-lahmacun.jpg" alt="Menu Lahmacun Maison" loading="lazy"/>
+      <h3 class="product-name">Menu Lahmacun Maison</h3>
+      <p class="product-desc">Sandwich + frites + boisson · XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-merguez.jpg" alt="Menu Merguez" loading="lazy"/>
+      <h3 class="product-name">Menu Merguez</h3>
+      <p class="product-desc">Sandwich + frites + boisson · XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-sucuk.jpg" alt="Menu Sucuk" loading="lazy"/>
+      <h3 class="product-name">Menu Sucuk</h3>
+      <p class="product-desc">Sandwich + frites + boisson · XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12€</span>
+      <img class="product-image" src="images/menu-yufka.jpg" alt="Menu Yufka" loading="lazy"/>
+      <h3 class="product-name">Menu Yufka</h3>
+      <p class="product-desc">Sandwich + frites + boisson · XL 13€</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── SANDWICHS ─── -->
+<section class="section" id="sandwichs">
+  <div class="sec-title">🥙 Sandwichs</div>
+  <div class="sec-sub">Pain frais · Garnitures maison · Viandes grillées</div>
+  <div class="product-grid">
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/american.jpg" alt="American" loading="lazy"/>
+      <h3 class="product-name">American</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/escalop-poulet.jpg" alt="Escalope de Poulet" loading="lazy"/>
+      <h3 class="product-name">Escalope de Poulet</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/kebab.jpg" alt="Kebab" loading="lazy"/>
+      <h3 class="product-name">Kebab</h3>
+      <p class="product-desc">Frites + boisson 33cl</p>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">13€</span>
+      <img class="product-image" src="images/kebab-entier.jpg" alt="Kebab Entier" loading="lazy"/>
+      <h3 class="product-name">Kebab Entier</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/kofte-bruche-maison.jpg" alt="Kofte Bruche Maison" loading="lazy"/>
+      <h3 class="product-name">Kofte Bruche Maison</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/kofte-maison.jpg" alt="Kofte Maison" loading="lazy"/>
+      <h3 class="product-name">Kofte Maison</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/lahmacun-maison.jpg" alt="Lahmacun Maison" loading="lazy"/>
+      <h3 class="product-name">Lahmacun Maison</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/merguez.jpg" alt="Merguez" loading="lazy"/>
+      <h3 class="product-name">Merguez</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/sucuk.jpg" alt="Sucuk" loading="lazy"/>
+      <h3 class="product-name">Sucuk</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/yufka.jpg" alt="Yufka" loading="lazy"/>
+      <h3 class="product-name">Yufka</h3>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── MENU TACOS ─── -->
+<section class="section big-only" id="menus-tacos">
+  <h2 class="sec-title">🌮 Menu Tacos</h2>
+  <div class="sec-sub">Crudités + cheddar + sauces</div>
+  <div class="product-grid">
+    <div class="product-card big-only">
+      <span class="price-tag">12.5€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Menu Tacos Cordon Bleu" loading="lazy"/>
+      <h3 class="product-name">Menu Tacos Cordon Bleu</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12.5€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Menu Tacos Kebab" loading="lazy"/>
+      <h3 class="product-name">Menu Tacos Kebab</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12.5€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Menu Tacos Kofte" loading="lazy"/>
+      <h3 class="product-name">Menu Tacos Kofte</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12.5€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Menu Tacos Merguez" loading="lazy"/>
+      <h3 class="product-name">Menu Tacos Merguez</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12.5€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Menu Tacos Nuggets" loading="lazy"/>
+      <h3 class="product-name">Menu Tacos Nuggets</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12.5€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Menu Tacos Steak" loading="lazy"/>
+      <h3 class="product-name">Menu Tacos Steak</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12.5€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Menu Tacos Tenders" loading="lazy"/>
+      <h3 class="product-name">Menu Tacos Tenders</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── TACOS ─── -->
+<section class="section" id="tacos">
+  <div class="sec-title">🌮 Tacos</div>
+  <div class="sec-sub">Crudités · Cheddar fondu · Sauce gruyère maison</div>
+  <div class="info-banner">🌮 Seul <strong>8.50€</strong> · Menu frites+boisson <strong>12€</strong> · Menu XL <strong>13€</strong></div>
+  <div class="product-grid">
+    <div class="product-card small-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Tacos Cordon Bleu" loading="lazy"/>
+      <h3 class="product-name">Tacos Cordon Bleu</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Tacos Kebab" loading="lazy"/>
+      <h3 class="product-name">Tacos Kebab</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Tacos Kofte" loading="lazy"/>
+      <h3 class="product-name">Tacos Kofte</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Tacos Merguez" loading="lazy"/>
+      <h3 class="product-name">Tacos Merguez</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Tacos Nuggets" loading="lazy"/>
+      <h3 class="product-name">Tacos Nuggets</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Tacos Steak" loading="lazy"/>
+      <h3 class="product-name">Tacos Steak</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/tacos-v2.jpg" alt="Tacos Tenders" loading="lazy"/>
+      <h3 class="product-name">Tacos Tenders</h3>
+      <p class="product-desc">Crudités + cheddar + sauces</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── ASSIETTES ─── -->
+<section class="section" id="assiettes">
+  <div class="sec-title">🍽️ Assiettes</div>
+  <div class="sec-sub">Servi avec frites, riz ou blé au choix</div>
+  <div class="product-grid">
+    <div class="product-card big-only">
+      <span class="price-tag">17.90€</span>
+      <img class="product-image" src="images/assiette-grillade-royale.png" alt="Grillade Royale" loading="lazy"/>
+      <h3 class="product-name">Grillade Royale</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">14€</span>
+      <img class="product-image" src="images/assiette-brochette-agneau.png" alt="Brochette d'Agneau" loading="lazy"/>
+      <h3 class="product-name">Brochette d'Agneau</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">13.50€</span>
+      <img class="product-image" src="images/assiette-kofte-bruche.png" alt="Kofte Bruche" loading="lazy"/>
+      <h3 class="product-name">Kofte Bruche</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">13.50€</span>
+      <img class="product-image" src="images/assiette-kofte.png" alt="Kofte" loading="lazy"/>
+      <h3 class="product-name">Kofte</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">13€</span>
+      <img class="product-image" src="images/assiette-kebab.png" alt="Kebab Assiette" loading="lazy"/>
+      <h3 class="product-name">Kebab Assiette</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">13€</span>
+      <img class="product-image" src="images/assiette-escalope.png" alt="Escalope" loading="lazy"/>
+      <h3 class="product-name">Escalope</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">13€</span>
+      <img class="product-image" src="images/assiette-merguez.png" alt="Merguez" loading="lazy"/>
+      <h3 class="product-name">Merguez Assiette</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">13€</span>
+      <img class="product-image" src="images/assiette-steak-hache.png" alt="Steak Haché" loading="lazy"/>
+      <h3 class="product-name">Steak Haché</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">13€</span>
+      <img class="product-image" src="images/assiette-tenders.png" alt="Tenders" loading="lazy"/>
+      <h3 class="product-name">Tenders</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12.50€</span>
+      <img class="product-image" src="images/assiette-wings.png" alt="Wings" loading="lazy"/>
+      <h3 class="product-name">Wings</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">12.50€</span>
+      <img class="product-image" src="images/assiette-escalope-panee.png" alt="Escalope Panée" loading="lazy"/>
+      <h3 class="product-name">Escalope Panée</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">8.50€</span>
+      <img class="product-image" src="images/assiette-nuggets.png" alt="Nuggets" loading="lazy"/>
+      <h3 class="product-name">Nuggets</h3>
+      <p class="product-desc">Frites, riz ou blé</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">6.50€</span>
+      <img class="product-image" src="images/assiette-salade.png" alt="Salade" loading="lazy"/>
+      <h3 class="product-name">Salade</h3>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── BURGERS ─── -->
+<section class="section" id="burgers">
+  <div class="sec-title">🍔 Burgers</div>
+  <div class="sec-sub">Pain artisanal · Menu = +frites +boisson</div>
+  <div class="product-grid">
+    <div class="product-card big-only">
+      <span class="price-tag">10€</span>
+      <img class="product-image" src="images/burger-big.png" alt="Big Burger" loading="lazy"/>
+      <h3 class="product-name">Big Burger</h3>
+      <p class="product-desc">Menu 12€ · Menu XL 13€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/burger-doublecheese.png" alt="Doublecheese" loading="lazy"/>
+      <h3 class="product-name">Doublecheese</h3>
+      <p class="product-desc">Menu 11€ · Menu XL 12€</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">6€</span>
+      <img class="product-image" src="images/burger-cheeseburger.png" alt="Cheeseburger" loading="lazy"/>
+      <h3 class="product-name">Cheeseburger</h3>
+      <p class="product-desc">Menu 9€ · Menu XL 10€</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">6€</span>
+      <img class="product-image" src="images/burger-chicken.png" alt="Chicken Burger" loading="lazy"/>
+      <h3 class="product-name">Chicken Burger</h3>
+      <p class="product-desc">Menu 9€ · Menu XL 10€</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">6€</span>
+      <img class="product-image" src="images/burger-kebab.png" alt="Kebab Burger" loading="lazy"/>
+      <h3 class="product-name">Kebab Burger</h3>
+      <p class="product-desc">Menu 8.50€ · Menu XL 9.50€</p>
+    </div>
+    <div class="product-card big-only">
+      <span class="price-tag">6€</span>
+      <img class="product-image" src="images/burger-long-fish.png" alt="Long Fish" loading="lazy"/>
+      <h3 class="product-name">Long Fish</h3>
+      <p class="product-desc">Menu 9€ · Menu XL 10€</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">4€</span>
+      <img class="product-image" src="images/burger-mini-cheese.png" alt="Mini Cheese" loading="lazy"/>
+      <h3 class="product-name">Mini Cheese</h3>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── EXTRAS ─── -->
+<section class="section" id="extras">
+  <div class="sec-title">🍟 Extras & Bowl</div>
+  <div class="sec-sub">Boxes, frites, bowl</div>
+  <div class="product-grid">
+    <div class="product-card small-only">
+      <span class="price-tag">9€</span>
+      <img class="product-image" src="images/bowl.png" alt="Bowl Viande au Choix" loading="lazy"/>
+      <h3 class="product-name">Bowl Viande au Choix</h3>
+      <p class="product-desc">Sauce fromagère, frites, riz ou blé</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">8€</span>
+      <img class="product-image" src="images/extra-box-kebab.png" alt="Box Kebab" loading="lazy"/>
+      <h3 class="product-name">Box Kebab</h3>
+      <p class="product-desc">Poulet, veau ou mixte</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">6€</span>
+      <img class="product-image" src="images/extra-box-tenders.png" alt="Box Tenders" loading="lazy"/>
+      <h3 class="product-name">Box Tenders</h3>
+      <p class="product-desc">2 pièces</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">6€</span>
+      <img class="product-image" src="images/extra-box-wings.png" alt="Box Wings" loading="lazy"/>
+      <h3 class="product-name">Box Wings</h3>
+      <p class="product-desc">3 pièces</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">5€</span>
+      <img class="product-image" src="images/extra-box-nuggets.png" alt="Box Nuggets" loading="lazy"/>
+      <h3 class="product-name">Box Nuggets</h3>
+      <p class="product-desc">4 pièces</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">5€</span>
+      <img class="product-image" src="images/extra-box-crousti.png" alt="Box CroustiFromage" loading="lazy"/>
+      <h3 class="product-name">Box CroustiFromage</h3>
+      <p class="product-desc">2 pièces</p>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">4€</span>
+      <img class="product-image" src="images/extra-grande-frites.png" alt="Grande Frites" loading="lazy"/>
+      <h3 class="product-name">Grande Frites</h3>
+    </div>
+    <div class="product-card small-only">
+      <span class="price-tag">3€</span>
+      <img class="product-image" src="images/extra-petite-frites.png" alt="Petite Frites" loading="lazy"/>
+      <h3 class="product-name">Petite Frites</h3>
+    </div>
+    <div class="product-card big-only" style="border-color:rgba(255,92,0,.3);background:rgba(255,92,0,.06)">
+      <span class="price-tag">20€</span>
+      <img class="product-image" src="images/extra-box-nuggets.png" alt="Maxi Box" loading="lazy"/>
+      <h3 class="product-name">🔥 Maxi Box</h3>
+      <p class="product-desc">4 nuggets · 4 tenders · 4 wings · 2 frites · 1 bouteille 1.5L</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── DESSERTS ─── -->
+<section class="section small-only" id="desserts">
+  <div class="sec-title">🍮 Desserts</div>
+  <div class="sec-sub">Faits maison avec amour ❤️</div>
+  <div class="product-grid">
+    <div class="product-card">
+      <span class="price-tag">4€</span>
+      <img class="product-image" src="images/dessert-baklava.jpg" alt="Baklava" loading="lazy"/>
+      <h3 class="product-name">Baklava</h3>
+      <p class="product-desc">Fait maison</p>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">4€</span>
+      <img class="product-image" src="images/dessert-cheesecake.jpg" alt="Cheesecake Maison" loading="lazy"/>
+      <h3 class="product-name">Cheesecake Maison</h3>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">3.50€</span>
+      <img class="product-image" src="images/dessert-tiramisu.jpg" alt="Tiramisu Bueno" loading="lazy"/>
+      <h3 class="product-name">Tiramisu Bueno</h3>
+      <p class="product-desc">Fait maison</p>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">3.50€</span>
+      <img class="product-image" src="images/dessert-tiramisu.jpg" alt="Tiramisu Caramel" loading="lazy"/>
+      <h3 class="product-name">Tiramisu Caramel</h3>
+      <p class="product-desc">Fait maison</p>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">3.50€</span>
+      <img class="product-image" src="images/dessert-tiramisu.jpg" alt="Tiramisu Chocolat" loading="lazy"/>
+      <h3 class="product-name">Tiramisu Chocolat</h3>
+      <p class="product-desc">Fait maison</p>
+    </div>
+    <div class="product-card">
+      <span class="price-tag">3.50€</span>
+      <img class="product-image" src="images/dessert-tiramisu.jpg" alt="Tiramisu Oreo" loading="lazy"/>
+      <h3 class="product-name">Tiramisu Oreo</h3>
+      <p class="product-desc">Fait maison</p>
+    </div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── BOISSONS ─── -->
+<section class="section small-only" id="boissons">
+  <div class="sec-title">🥤 Boissons</div>
+  <div class="sec-sub">Fraîches · Formats variés</div>
+  <div class="bois-grid">
+    <div class="bois-card"><div class="bois-name">Ayran</div><div class="bois-sub">33cl</div><div class="bois-price">2€</div></div>
+    <div class="bois-card"><div class="bois-name">Coca Cola</div><div class="bois-sub">33cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Coca Cola</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Coca Cola</div><div class="bois-sub">1.5L</div><div class="bois-price">4€</div></div>
+    <div class="bois-card"><div class="bois-name">Coca Zero</div><div class="bois-sub">33cl</div><div class="bois-price">2€</div></div>
+    <div class="bois-card"><div class="bois-name">Coca Zero</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Coca Cherry</div><div class="bois-sub">33cl</div><div class="bois-price">2.50€</div></div>
+    <div class="bois-card"><div class="bois-name">Coca Cherry</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Fanta</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Sprite</div><div class="bois-sub">1.5L</div><div class="bois-price">4€</div></div>
+    <div class="bois-card"><div class="bois-name">Ice Tea</div><div class="bois-sub">33cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Ice Tea</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Ice Tea</div><div class="bois-sub">1.5L</div><div class="bois-price">4€</div></div>
+    <div class="bois-card"><div class="bois-name">Ice Tea Framboise</div><div class="bois-sub">33cl</div><div class="bois-price">2€</div></div>
+    <div class="bois-card"><div class="bois-name">Oasis</div><div class="bois-sub">33cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Orangina</div><div class="bois-sub">33cl</div><div class="bois-price">2€</div></div>
+    <div class="bois-card"><div class="bois-name">Orangina</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Schweppes</div><div class="bois-sub">33cl</div><div class="bois-price">2€</div></div>
+    <div class="bois-card"><div class="bois-name">Schweppes</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Tropico Tropical</div><div class="bois-sub">33cl</div><div class="bois-price">2€</div></div>
+    <div class="bois-card"><div class="bois-name">Monster</div><div class="bois-sub">50cl</div><div class="bois-price">3.50€</div></div>
+    <div class="bois-card"><div class="bois-name">RedBull</div><div class="bois-sub">25cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Powerade Bleu</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+  </div>
+</section>
+<div class="divider"></div>
+
+<!-- ─── BIÈRES ─── -->
+<section class="section small-only" id="bieres">
+  <div class="sec-title">🍺 Bières & Pression</div>
+  <div class="sec-sub">En bouteille, cannette ou au fût</div>
+  <div class="bois-grid">
+    <div class="bois-card"><div class="bois-name">Bière Efes</div><div class="bois-sub">50cl bouteille</div><div class="bois-price">4€</div></div>
+    <div class="bois-card"><div class="bois-name">Bière Efes</div><div class="bois-sub">50cl cannette</div><div class="bois-price">4€</div></div>
+    <div class="bois-card"><div class="bois-name">Bavaria 8/6</div><div class="bois-sub">50cl</div><div class="bois-price">3.50€</div></div>
+    <div class="bois-card"><div class="bois-name">Desperados</div><div class="bois-sub">50cl</div><div class="bois-price">4€</div></div>
+    <div class="bois-card"><div class="bois-name">Kronenbourg</div><div class="bois-sub">50cl</div><div class="bois-price">3€</div></div>
+    <div class="bois-card"><div class="bois-name">Pression 25cl</div><div class="bois-sub">Kronenbourg</div><div class="bois-price">4€</div></div>
+    <div class="bois-card"><div class="bois-name">Pression 50cl</div><div class="bois-sub">Kronenbourg</div><div class="bois-price">6€</div></div>
+    <div class="bois-card"><div class="bois-name">Pression Saison 25cl</div><div class="bois-sub"></div><div class="bois-price">5€</div></div>
+    <div class="bois-card"><div class="bois-name">Pression Saison 50cl</div><div class="bois-sub"></div><div class="bois-price">7€</div></div>
+    <div class="bois-card"><div class="bois-name">Picon 25cl</div><div class="bois-sub"></div><div class="bois-price">4.50€</div></div>
+    <div class="bois-card"><div class="bois-name">Picon 50cl</div><div class="bois-sub"></div><div class="bois-price">7€</div></div>
+  </div>
+</section>
+
+<!-- FAB -->
+<div class="fab" style="display:none">
+</div>
+
+<script>
+  // ═══ TOGGLE MODE ═══ (défini en premier, function declaration = hoistée)
+  function setMode(m) {
+    try {
+      // Boutons
+      var btns = document.querySelectorAll('.mode-btn');
+      for(var i=0; i<btns.length; i++) btns[i].classList.remove('active');
+      var ids = {small:'modeSmall', big:'modeBig', all:'modeAll'};
+      var btn = document.getElementById(ids[m]);
+      if(btn) btn.classList.add('active');
+
+      // Classes body
+      var body = document.body;
+      body.classList.remove('mode-small','mode-big','mode-all');
+      body.classList.add('mode-' + m);
+    } catch(e) { console.error('setMode error:', e); }
+  }
+  setMode('all');
+
+  // ═══ NAV CATÉGORIES ═══
+  try {
+    var cats = document.querySelectorAll('.category-item');
+    var secs = document.querySelectorAll('section[id]');
+    cats.forEach(function(c) {
+      c.addEventListener('click', function() {
+        var t = document.getElementById(c.dataset.target);
+        if(t) window.scrollTo({top: t.getBoundingClientRect().top + window.scrollY - 140, behavior:'smooth'});
+      });
+    });
+    var obs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if(e.isIntersecting){
+          cats.forEach(function(c){ c.classList.remove('active'); });
+          var a = document.querySelector('.category-item[data-target="'+e.target.id+'"]');
+          if(a){ a.classList.add('active'); a.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'}); }
+        }
+      });
+    }, {rootMargin:'-140px 0px -60% 0px'});
+    secs.forEach(function(s){ obs.observe(s); });
+  } catch(e) { console.error('nav error:', e); }
+
+  // ═══ HORAIRES ═══
+  try {
+    var closeHour = [23, 22, 23, 23, 23, 23, 23];
+    var now = new Date();
+    // Offset Paris (UTC+1 hiver / UTC+2 été)
+    var utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    var offset = now.getMonth() >= 2 && now.getMonth() <= 9 ? 2 : 1;
+    var paris = new Date(utc + offset * 3600000);
+    var day = (paris.getDay() + 6) % 7;
+    var totalMin = paris.getHours() * 60 + paris.getMinutes();
+    var pill = document.getElementById('statusPill');
+    var txt = document.getElementById('statusText');
+    if(pill && txt) {
+      if(totalMin >= 660 && totalMin < closeHour[day] * 60) {
+        txt.textContent = 'Ouvert · Ferme à ' + closeHour[day] + 'h00';
+      } else {
+        pill.classList.add('closed');
+        txt.textContent = 'Fermé · Ouvre à 11h00';
+      }
+    }
+  } catch(e) { console.error('horaires error:', e); }
+</script>
+</body>
+</html>
